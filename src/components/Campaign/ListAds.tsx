@@ -115,21 +115,14 @@ const LisAds: React.FC<LisAdsProps> = ({
 
   const handleSelectClick = (key: number) => {
     const selectedIndex = selectedAds.indexOf(key);
-    let newSelectedAds: number[] = [];
+    let newSelectedAds: number[] = [...selectedAds];
 
-    if (selectedIndex === -1) {
-      newSelectedAds = newSelectedAds.concat(selectedAds, key);
-    } else if (selectedIndex === 0) {
-      newSelectedAds = newSelectedAds.concat(selectedAds.slice(1));
-    } else if (selectedIndex === selectedAds.length - 1) {
-      newSelectedAds = newSelectedAds.concat(selectedAds.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelectedAds = newSelectedAds.concat(
-        selectedAds.slice(0, selectedIndex),
-        selectedAds.slice(selectedIndex + 1)
-      );
+    if(selectedIndex < 0){
+      newSelectedAds.push(key)
     }
-
+    else{
+      newSelectedAds.splice(selectedIndex,1)
+    }
     setSelectedAds(newSelectedAds);
   };
 
